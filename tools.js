@@ -15,12 +15,12 @@
             reader.onload = function (e) {
                 const text = e.target.result;
                 const questions = parseQuestions(text)
-                let timeout = 10000
+                let timeout = 4000
                 for (const question of questions) {
                     setTimeout(() => {
                         addQuestion(question)
                     }, timeout)
-                    timeout += 10000
+                    timeout += 4000
                 }
             };
             reader.readAsText(input)
@@ -67,10 +67,10 @@
                 console.log("IN ADDING FOURTH ANSWER")
                 document.querySelector('[data-action="click->nested-form#add_association"]').click()
                 window.addedFourthAnswer = false
-            }, 2000)
+            }, 1500)
         }
 
-        setTimeout(() => console.log("IN CLICK ADD", document.querySelector('[class="btn btn-md btn-thumb-grey btn-icon"]').click()), 3000)
+        setTimeout(() => console.log("IN CLICK ADD", document.querySelector('[class="btn btn-md btn-thumb-grey btn-icon"]').click()), 2000)
 
         setTimeout(() => {
                 document.querySelector('#quiz_question_text').value = question.title
@@ -93,13 +93,13 @@
                         }
                     }
                 }
-            }, 4000)
+            }, 2500)
         // Get all questions attributes and fill them
 
         // We click the "Create Question" button
         setTimeout(() => {
             document.querySelector('[data-product-editor--quiz-question-form-target="submit"]').click()
-        }, 5000)
+        }, 3000)
     }
 
     window.importer = {

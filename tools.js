@@ -29,13 +29,27 @@
     }
 
     function parseQuestions(rawFile) {
-        const regex = `(".*"),multiple-choice,(".*"),(".*"),(".*"),(".*"),,,,,,,,,,,,([0-9])`
+        const regex = `"(.*)",multiple-choice,"(.*)","(.*)","(.*)","(.*)",,,,,,,,,,,,([0-9])`
+        const regex2 = `"(.*)",multiple-choice,"(.*)",,"(.*)",,"(.*)",,"(.*)",,,,,,"([0-9|,])","(.*)"`
+        const regex3 = `"(.*)",multi-select,"(.*)",,"(.*)",,"(.*)",,"(.*)",,,,,,"([0-9|,])","(.*)"`
+        const regex4 = `"(.*)",multiple-choice,"(.*)","(.*)","(.*)","(.*)"`
         const questions = []
+
         let split = rawFile.split('\n')
         for (const line of split) {
             console.log("LINE", line)
             let matches = Array.from(line.matchAll(regex))
             console.log("MATCHES", matches)
+            if (matches.length == 0) {
+                matches = Array.from(line.matchAll(regex2))
+            }
+            if (matches.length == 0) {
+                matches = Array.from(line.matchAll(regex3))
+            }
+            if (matches.length == 0) {
+                matches = Array.from(line.matchAll(regex4))
+            }
+            
             if (matches.length > 0) {
                 matches = matches[0]
                 const question = {
@@ -47,6 +61,7 @@
             }
         }
         console.log(questions)
+        window.questions = questions
         return questions
     }
 
